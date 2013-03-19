@@ -1,7 +1,7 @@
 /*
-May only work in Google Chrome.
-Adding this will DRASTICALLY slow down your code.
-Only use this for debugging to try and track down excessive object creation!
+ May only work in Google Chrome.
+ adding this will DRASTICALLY slow down your code.
+ Only use this for debugging to try and track down excessive object creation!
  */
 goog.provide('UsageTracker');
 
@@ -25,68 +25,65 @@ UsageTracker = function(id) {
 
 /**
  * @type {Array.<!UsageTracker>}
- * @private
  */
 UsageTracker.trackers = [];
 
 /**
  * @type {Object.<!UsageTracker>}
- * @private
  */
 UsageTracker.trackersByID = {};
 
 /**
  * @type {boolean}
  * @const
- * @private
  */
 UsageTracker.ENABLED = true;
 
-if ( !UsageTracker.ENABLED ) {
-    UsageTracker.dummyTracker = new UsageTracker("NotTracking");
+if (!UsageTracker.ENABLED) {
+    UsageTracker.dummyTracker = new UsageTracker('NotTracking');
 }
 
 UsageTracker.get = function(id) {
-    if ( !UsageTracker.ENABLED ) {
+    if (!UsageTracker.ENABLED) {
         return UsageTracker.dummyTracker;
     }
     var tracker = UsageTracker.trackersByID[id];
-    if ( tracker == null ) {
+    if (tracker == null) {
         tracker = new UsageTracker(id);
     }
     return tracker;
 };
 
 UsageTracker.logStatsToConsole = function() {
-    for( var i = 0; i < UsageTracker.trackers.length; i++ ) {
+    for (var i = 0; i < UsageTracker.trackers.length; i++) {
         var t = UsageTracker.trackers[i];
-        var gNotFree = (t.getCount - t.freeCount);
-        window['console']['log'](t.id + ": " + t.createCount + "; " + t.getCount + " - " + t.freeCount + " = " + gNotFree + (gNotFree > 0 ? " (" + Math.round((gNotFree/t.getCount) * 10000)/100 + "%)" : ""));
+        var gNotfree = (t.getCount - t.freeCount);
+        window['console']['log'](t.id + ': ' + t.createCount + '; ' + t.getCount + ' - ' + t.freeCount + ' = ' + gNotfree + (gNotfree > 0 ? ' (' + Math.round((gNotfree / t.getCount) * 10000) / 100 + '%)' : ''));
     }
 };
 
 UsageTracker.prototype.trackCreate = function() {
-    if ( UsageTracker.ENABLED ) {
+    if (UsageTracker.ENABLED) {
         this.createCount++;
-        if ( this.doTrack ) {
+        if (this.doTrack) {
             this.increment(this.creates, this.getCallers());
         }
     }
 };
 
 UsageTracker.prototype.trackGet = function() {
-    if ( UsageTracker.ENABLED ) {
+    if (UsageTracker.ENABLED) {
         this.getCount++;
-        if ( this.doTrack ) {
+        if (this.doTrack) {
             this.increment(this.gets, this.getCallers());
         }
     }
 };
 
 UsageTracker.prototype.trackFree = function() {
-    if ( UsageTracker.ENABLED ) {
+    if (UsageTracker.ENABLED) {
         this.freeCount++;
-        if ( this.doTrack ) {
+        if (this.doTrack) {
             this.increment(this.frees, this.getCallers());
         }
     }
@@ -94,10 +91,10 @@ UsageTracker.prototype.trackFree = function() {
 
 UsageTracker.prototype.getOffenders = function() {
     var offenders = [];
-    for( var i = 0; i < this.callers.length; i++) {
-        var offset = this.gets[this.callers[i]] - this.frees[this.callers[i]]; 
-        if ( offset != 0 ) {
-            offenders.push(this.callers[i] + " = " + offset);
+    for (var i = 0; i < this.callers.length; i++) {
+        var offset = this.gets[this.callers[i]] - this.frees[this.callers[i]];
+        if (offset != 0) {
+            offenders.push(this.callers[i] + ' = ' + offset);
         }
     }
     return offenders;
@@ -107,9 +104,9 @@ UsageTracker.prototype.getOffenders = function() {
  * @private
  */
 UsageTracker.prototype.increment = function(object, indices) {
-    for ( var i = 0; i < indices.length; i++ ) {
+    for (var i = 0; i < indices.length; i++) {
         var index = indices[i];
-        if ( object[index] == null ) {
+        if (object[index] == null) {
             this.gets[index] = 0;
             this.frees[index] = 0;
             this.creates[index] = 0;
@@ -125,10 +122,10 @@ UsageTracker.prototype.increment = function(object, indices) {
 UsageTracker.prototype.getCallers = function() {
     var callers = ['unknown'];
     try {
-        this.nonMethod();
-    } catch(e) {
+        goog.nullFunction();
+    } catch (e) {
         var stack = e.stack.match(/[A-Za-z0-9]+\.js:\d+:\d+/g).splice(3);
-        if ( stack.length != 0 ) {
+        if (stack.length != 0) {
             callers = stack;
         }
     }
