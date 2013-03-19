@@ -1,0 +1,4 @@
+Forked from illandril/box2dweb-closure.
+
+Gjslint compliant.
+Produces no warnings in ADVANCED_OPTIMIZATION mode for the Google Closure Compiler.
