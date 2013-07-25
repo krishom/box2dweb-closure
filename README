@@ -11,10 +11,11 @@ http://code.google.com/p/box2dweb/
 box2Dweb was modified to utilize Google Closure, as well as other bug fixes, optimizations, and tweaks by Illandril
 https://github.com/illandril/box2dweb-closure
 
-Fixed gjslint and implemented RopeJoint.
+Fixed gjslint and implemented RopeJoint
 https://github.com/firecow/box2dweb-closure
 
-Requires Google Closure: http://code.google.com/closure/
+Requires Google Closure
+http://code.google.com/closure/
 
 Also consider the emscripten port of Box2D 2.2.1
 https://github.com/kripken/box2d.js/
