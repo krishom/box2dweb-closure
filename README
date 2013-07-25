@@ -1,6 +1,20 @@
-Forked from illandril/box2dweb-closure.
+Original Box2D created by Erin Catto
+http://www.gphysics.com
+http://box2d.org/
 
-RopeJoint implemented.
+Box2D was converted to Flash by Boris the Brave, Matt Bush, and John Nesky as Box2DFlash
+http://www.box2dflash.org/
 
-Gjslint compliant.
-Produces no warnings in ADVANCED_OPTIMIZATION mode for the Google Closure Compiler.
+Box2DFlash 2.1a was converted from Flash to Javascript by Uli Hecht as box2Dweb
+http://code.google.com/p/box2dweb/
+
+box2Dweb was modified to utilize Google Closure, as well as other bug fixes, optimizations, and tweaks by Illandril
+https://github.com/illandril/box2dweb-closure
+
+Fixed gjslint and implemented RopeJoint.
+https://github.com/firecow/box2dweb-closure
+
+Requires Google Closure: http://code.google.com/closure/
+
+Also consider the emscripten port of Box2D 2.2.1
+https://github.com/kripken/box2d.js/
